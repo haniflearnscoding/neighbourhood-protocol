@@ -1,99 +1,49 @@
 /**
  * scene1.js — The Lookout
- * Manages phone-thread interaction for "Warn Leo" path.
+ * Warn Leo path: show phone illustration + SEND button.
  */
 
-import { NARRATIVE } from '../data/narrative.js';
-
-const { phone } = NARRATIVE.scene1;
-
-let msgIndex = 0;
-let phoneReady = false;
-
-/**
- * Activate the phone UI, begin advancing messages on tap/click.
- * @param {Function} onSend — called when user taps SEND
- */
 export function activatePhoneUI(onSend) {
-  const phoneUI    = document.getElementById('phone-ui');
-  const thread     = document.getElementById('phone-thread');
-  const sendArea   = document.getElementById('phone-send-area');
-  const sendBtn    = document.getElementById('phone-send-btn');
-  const tapHint    = document.getElementById('phone-tap-hint');
+  const img     = document.getElementById('scene1-img');
+  const footer  = document.getElementById('scene1-overlay-footer');
+  const choices = document.getElementById('scene1-choices');
+  const prompt  = document.querySelector('#screen-scene1 .scene-prompt');
+  const narrative = document.querySelector('#screen-scene1 .scene-narrative');
 
-  // Reset state
-  thread.innerHTML = '';
-  sendArea.classList.remove('is-active');
-  msgIndex = 0;
-  phoneReady = false;
+  // Hide choice UI
+  if (choices)   choices.style.display   = 'none';
+  if (prompt)    prompt.style.display    = 'none';
+  if (narrative) narrative.style.display = 'none';
 
-  // Show phone
-  phoneUI.classList.add('is-active');
-
-  // Brief pause then show first message
+  // Crossfade to phone illustration
+  img.classList.add('is-swapping');
   setTimeout(() => {
-    advanceMessage(thread, sendArea, tapHint);
-    phoneReady = true;
+    img.src = 'assets/images/xd/Scene 1 - Warning2.png';
+    img.classList.remove('is-swapping');
   }, 600);
 
-  // Click anywhere on phone to advance
-  const handleTap = () => {
-    if (!phoneReady) return;
-    if (msgIndex < phone.messages.length) {
-      advanceMessage(thread, sendArea, tapHint);
-    }
-  };
-  phoneUI.addEventListener('click', handleTap);
+  // SEND button in footer
+  footer.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn btn--large';
+  btn.textContent = 'SEND';
+  footer.appendChild(btn);
+  footer.style.display = 'flex';
 
-  // SEND triggers success
-  sendBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    phoneUI.removeEventListener('click', handleTap);
+  btn.addEventListener('click', () => {
+    footer.style.display = 'none';
+    footer.innerHTML = '';
     onSend();
   }, { once: true });
 }
 
-function advanceMessage(thread, sendArea, tapHint) {
-  if (msgIndex >= phone.messages.length) {
-    // All messages shown — activate send
-    sendArea.classList.add('is-active');
-    if (tapHint) tapHint.style.display = 'none';
-    return;
-  }
-
-  const msg = document.createElement('div');
-  msg.className = 'phone-msg phone-msg--out';
-  msg.textContent = phone.messages[msgIndex];
-  thread.appendChild(msg);
-
-  // Trigger animation
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => msg.classList.add('is-visible'));
-  });
-
-  // Scroll to bottom
-  thread.scrollTop = thread.scrollHeight;
-
-  msgIndex++;
-
-  // If last message, prompt send
-  if (msgIndex >= phone.messages.length) {
-    sendArea.classList.add('is-active');
-    if (tapHint) tapHint.style.display = 'none';
-  }
-}
-
-/**
- * Hide and reset the phone UI (called on scene exit/retry).
- */
 export function deactivatePhoneUI() {
-  const phoneUI = document.getElementById('phone-ui');
-  const thread  = document.getElementById('phone-thread');
-  const sendArea = document.getElementById('phone-send-area');
-
-  if (phoneUI) phoneUI.classList.remove('is-active');
-  if (thread) thread.innerHTML = '';
-  if (sendArea) sendArea.classList.remove('is-active');
-  msgIndex = 0;
-  phoneReady = false;
+  const footer    = document.getElementById('scene1-overlay-footer');
+  const choices   = document.getElementById('scene1-choices');
+  const prompt    = document.querySelector('#screen-scene1 .scene-prompt');
+  const narrative = document.querySelector('#screen-scene1 .scene-narrative');
+  if (footer)    { footer.style.display = 'none'; footer.innerHTML = ''; }
+  if (choices)   choices.style.display   = '';
+  if (prompt)    prompt.style.display    = '';
+  if (narrative) narrative.style.display = '';
 }
