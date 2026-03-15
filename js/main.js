@@ -32,8 +32,12 @@ function handleTransition(from, to) {
       showOverlay(
         'screen-scene1', 'scene1-frame', 'scene1-overlay-footer', 'scene1-choices',
         'success', NARRATIVE.scene1.success, 'NEXT SCENE',
-        () => engine.transition(STATES.SCENE_2)
+        () => engine.transition(STATES.INTRO)
       );
+      break;
+
+    case STATES.INTRO:
+      activateScreen('screen-intro');
       break;
 
     case STATES.SCENE_1_FAILURE:
