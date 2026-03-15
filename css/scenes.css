@@ -68,6 +68,12 @@
   filter: brightness(0.2);
 }
 
+.screen.is-dimmed .scene-header,
+.screen.is-dimmed .scene-below {
+  filter: brightness(0.2);
+  transition: filter var(--transition-slow);
+}
+
 /* Keep .scene-frame__bg for overlay/camera elements that still need position:absolute */
 .scene-frame__bg {
   position: absolute;
