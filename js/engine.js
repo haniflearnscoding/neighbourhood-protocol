@@ -60,10 +60,6 @@ export function showOverlay(sceneId, frameId, footerId, choicesId, type, data, b
   const footer  = document.getElementById(footerId);
   const choices = document.getElementById(choicesId);
 
-  // Dim the whole screen (header + below + frame)
-  const screen = document.getElementById(sceneId);
-  if (screen) screen.classList.add('is-dimmed');
-
   // Hide choice buttons
   if (choices) choices.style.display = 'none';
 
@@ -100,7 +96,6 @@ export function showOverlay(sceneId, frameId, footerId, choicesId, type, data, b
   btn.addEventListener('click', () => {
     // Reset
     overlay.remove();
-    if (screen) screen.classList.remove('is-dimmed');
     if (bg) bg.style.filter = '';
     if (choices) choices.style.display = '';
     footer.style.display = 'none';
