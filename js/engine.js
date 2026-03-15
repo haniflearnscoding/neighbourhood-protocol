@@ -63,9 +63,14 @@ export function showOverlay(sceneId, frameId, footerId, choicesId, type, data, b
   // Hide choice buttons
   if (choices) choices.style.display = 'none';
 
-  // Dim the frame bg
+  // Dim the frame bg, header, and below
+  const screen = document.getElementById(sceneId);
+  const header = screen && screen.querySelector('.scene-header');
+  const below  = screen && screen.querySelector('.scene-below');
   const bg = frame.querySelector('.scene-frame__bg');
-  if (bg) bg.style.filter = 'brightness(0.2)';
+  if (bg)     bg.style.filter     = 'brightness(0.2)';
+  if (header) header.style.filter = 'brightness(0.2)';
+  if (below)  below.style.filter  = 'brightness(0.2)';
 
   // Remove any existing overlay inside frame
   const existing = frame.querySelector('.evidence-overlay');
@@ -96,7 +101,9 @@ export function showOverlay(sceneId, frameId, footerId, choicesId, type, data, b
   btn.addEventListener('click', () => {
     // Reset
     overlay.remove();
-    if (bg) bg.style.filter = '';
+    if (bg)     bg.style.filter     = '';
+    if (header) header.style.filter = '';
+    if (below)  below.style.filter  = '';
     if (choices) choices.style.display = '';
     footer.style.display = 'none';
     footer.innerHTML = '';
