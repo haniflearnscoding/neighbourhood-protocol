@@ -45,7 +45,7 @@
 
 .scene-frame {
   position: relative;
-  flex: 1 1 0;
+  flex: 0.9 1 0;
   min-height: 0;
   width: 100%;
   display: flex;
@@ -84,17 +84,12 @@
   opacity: 0;
 }
 
-/* Fade in narrative */
+/* Fade in narrative and buttons */
 .scene-narrative,
-.scene-prompt {
-  transition: opacity 1s ease;
-}
-
-/* Fade in buttons */
+.scene-prompt,
 .choice-pair {
   transition: opacity 0.5s ease;
 }
-
 .scene-narrative.is-hidden,
 .scene-prompt.is-hidden,
 .choice-pair.is-hidden {
@@ -112,7 +107,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 1rem 0.8rem;
+  padding: 0.8rem 1rem 0;
   text-align: center;
   flex-shrink: 0;
 }
