@@ -104,17 +104,21 @@ function truckArrival() {
   img.src = 'assets/images/xd/Scene 1 – 1.2.png';
   [narrative, prompt, choices].forEach(el => el.classList.add('is-hidden'));
 
-  // After 2.5s: hard-cut to truck image
+  // After 2.5s: fade out, swap to truck, fade back in
   setTimeout(() => {
-    img.src = 'assets/images/xd/Scene 1 - Choice.png';
-
-    // Narrative appears after image swap
+    img.classList.add('is-swapping');
     setTimeout(() => {
-      narrative.classList.remove('is-hidden');
-      prompt.classList.remove('is-hidden');
+      img.src = 'assets/images/xd/Scene 1 - Choice.png';
+      img.classList.remove('is-swapping');
 
-      // Buttons appear after narrative
-      setTimeout(() => choices.classList.remove('is-hidden'), 800);
+      // Narrative appears after image fades back in
+      setTimeout(() => {
+        narrative.classList.remove('is-hidden');
+        prompt.classList.remove('is-hidden');
+
+        // Buttons follow narrative
+        setTimeout(() => choices.classList.remove('is-hidden'), 800);
+      }, 600);
     }, 600);
   }, 2500);
 }
