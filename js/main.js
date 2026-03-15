@@ -111,14 +111,12 @@ function truckArrival() {
       img.src = 'assets/images/xd/Scene 1 - Choice.png';
       img.classList.remove('is-swapping');
 
-      // Narrative appears after image fades back in
-      setTimeout(() => {
-        narrative.classList.remove('is-hidden');
-        prompt.classList.remove('is-hidden');
+      // Narrative fades in with the truck
+      narrative.classList.remove('is-hidden');
+      prompt.classList.remove('is-hidden');
 
-        // Buttons follow narrative
-        setTimeout(() => choices.classList.remove('is-hidden'), 800);
-      }, 600);
+      // Buttons appear after narrative has settled
+      setTimeout(() => choices.classList.remove('is-hidden'), 1200);
     }, 600);
   }, 2500);
 }

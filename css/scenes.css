@@ -84,12 +84,17 @@
   opacity: 0;
 }
 
-/* Fade in narrative and buttons */
+/* Fade in narrative */
 .scene-narrative,
-.scene-prompt,
+.scene-prompt {
+  transition: opacity 1s ease;
+}
+
+/* Fade in buttons */
 .choice-pair {
   transition: opacity 0.5s ease;
 }
+
 .scene-narrative.is-hidden,
 .scene-prompt.is-hidden,
 .choice-pair.is-hidden {
@@ -107,7 +112,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 1rem 1.2rem;
+  padding: 0.5rem 1rem 0.8rem;
   text-align: center;
   flex-shrink: 0;
 }
