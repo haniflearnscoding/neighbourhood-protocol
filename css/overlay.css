@@ -87,6 +87,15 @@
 
 .evidence-overlay__action {
   margin-top: var(--space-sm);
+  border-color: var(--color-white);
+  background: transparent;
+  color: var(--color-white);
+}
+
+.evidence-overlay__action:hover,
+.evidence-overlay__action:focus-visible {
+  background: var(--color-white);
+  color: var(--color-black);
 }
 
 /* ── Scan-in animation for overlay content ─────────── */

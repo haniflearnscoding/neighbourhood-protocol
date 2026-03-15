@@ -63,47 +63,38 @@ export function showOverlay(sceneId, frameId, footerId, choicesId, type, data, b
   // Hide choice buttons
   if (choices) choices.style.display = 'none';
 
-  // Dim the frame bg, header, and below
+  // Dim the entire screen
   const screen = document.getElementById(sceneId);
-  const header = screen && screen.querySelector('.scene-header');
-  const below  = screen && screen.querySelector('.scene-below');
-  const bg = frame.querySelector('.scene-frame__bg');
-  if (bg)     bg.style.filter     = 'brightness(0.2)';
-  if (header) header.style.filter = 'brightness(0.2)';
-  if (below)  below.style.filter  = 'brightness(0.2)';
+  if (screen) screen.style.filter = 'brightness(0.2)';
 
-  // Remove any existing overlay inside frame
-  const existing = frame.querySelector('.evidence-overlay');
+  // Remove any existing overlay
+  const existing = document.getElementById('app-overlay');
   if (existing) existing.remove();
 
-  // Build overlay inside frame
+  // Build overlay on #app so it sits outside the dimmed screen
   const overlay = document.createElement('div');
+  overlay.id = 'app-overlay';
   overlay.className = `evidence-overlay ${type}`;
+
+  const btn = document.createElement('button');
+  btn.className = 'btn btn--large evidence-overlay__action';
+  btn.textContent = buttonLabel;
+
   overlay.innerHTML = `
     <p class="evidence-overlay__outcome">${data.outcome}</p>
     <div class="evidence-overlay__divider"></div>
     <p class="evidence-overlay__fact">${data.fact}</p>
     <p class="evidence-overlay__source">${data.source}</p>
   `;
-  frame.appendChild(overlay);
-
-  // Build action button below frame
-  footer.innerHTML = '';
-  const btn = document.createElement('button');
-  btn.className = 'btn btn--dark btn--large';
-  btn.textContent = buttonLabel;
-  footer.appendChild(btn);
-  footer.style.display = 'flex';
+  overlay.appendChild(btn);
+  document.getElementById('app').appendChild(overlay);
 
   // Animate overlay in
   requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add('is-visible')));
 
   btn.addEventListener('click', () => {
-    // Reset
     overlay.remove();
-    if (bg)     bg.style.filter     = '';
-    if (header) header.style.filter = '';
-    if (below)  below.style.filter  = '';
+    if (screen) screen.style.filter = '';
     if (choices) choices.style.display = '';
     footer.style.display = 'none';
     footer.innerHTML = '';
