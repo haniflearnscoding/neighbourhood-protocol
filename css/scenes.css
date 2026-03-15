@@ -1,0 +1,158 @@
+/* ── INTRO ──────────────────────────────────────────── */
+
+#screen-intro {
+  background: var(--color-white);
+}
+
+.intro__title {
+  font-family: var(--font-header);
+  font-size: clamp(2rem, 6vw, 5rem);
+  color: var(--color-black);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+/* ── Scene screens — flex column filling 100vh ──────── */
+
+#screen-scene1,
+#screen-scene2,
+#screen-scene3 {
+  background: var(--color-white);
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Persistent scene header ────────────────────────── */
+
+.scene-header {
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem 1rem 0.2rem;
+  flex-shrink: 0;
+}
+
+.scene-header__title {
+  font-family: var(--font-header);
+  font-size: clamp(0.85rem, 1.8vw, 1.2rem);
+  color: var(--color-black);
+  letter-spacing: 0.12em;
+}
+
+/* ── Illustration frame — grows to fill available height */
+
+.scene-frame {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* <img> inside the frame — contain so all borders are visible */
+.scene-frame__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter var(--transition-slow);
+}
+
+/* Dim on overlay */
+.screen.is-dimmed .scene-frame__img {
+  filter: brightness(0.2);
+}
+
+/* Keep .scene-frame__bg for overlay/camera elements that still need position:absolute */
+.scene-frame__bg {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: filter var(--transition-slow);
+}
+
+/* ── Below-frame content — compact, fixed height ────── */
+
+.scene-below {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem 1.2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.scene-narrative {
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+  font-weight: 700;
+  color: var(--color-black);
+  line-height: 1.5;
+}
+
+.scene-prompt {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-mid-gray);
+  letter-spacing: 0.05em;
+}
+
+/* Buttons on white background */
+.scene-below .btn {
+  border-color: var(--color-black);
+  background: var(--color-white);
+  color: var(--color-black);
+  font-size: 0.75rem;
+  padding: 0.5em 1.5em;
+}
+
+.scene-below .btn:hover,
+.scene-below .btn:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* ── END SCREEN ─────────────────────────────────────── */
+
+#screen-end {
+  background: var(--color-black);
+}
+
+.end__title {
+  font-family: var(--font-header);
+  font-size: var(--text-h2);
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: var(--space-md);
+  white-space: pre-line;
+  text-align: center;
+}
+
+.end__body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--color-mid-gray);
+  line-height: 1.8;
+  white-space: pre-line;
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: var(--space-lg);
+}
+
+.end__actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}

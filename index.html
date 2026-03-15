@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Neighbourhood Protocol — An interactive narrative about community, surveillance, and solidarity.">
+  <title>Neighbourhood Protocol</title>
+
+  <link rel="stylesheet" href="https://use.typekit.net/eij1zrm.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/phone-ui.css">
+  <link rel="stylesheet" href="css/camera-ui.css">
+  <link rel="stylesheet" href="css/overlay.css">
+
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════════════════════════════════════════════
+       INTRO
+  ══════════════════════════════════════════════════ -->
+  <section id="screen-intro" class="screen" aria-label="Introduction">
+    <div class="screen__content">
+      <h1 class="intro__title">NEIGHBOURHOOD PROTOCOL</h1>
+      <button id="btn-start" class="btn btn--dark">START</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SCENE 1 — THE LOOKOUT
+  ══════════════════════════════════════════════════ -->
+  <section id="screen-scene1" class="screen" aria-label="Scene 1: The Lookout">
+
+    <!-- Persistent header -->
+    <div class="scene-header">
+      <span class="scene-header__title">NEIGHBOURHOOD PROTOCOL</span>
+    </div>
+
+    <!-- Illustration frame -->
+    <div class="scene-frame" id="scene1-frame">
+      <img class="scene-frame__img" src="assets/images/xd/Scene 1 - Choice.png" alt="A person watches from a window as a white truck idles outside">
+      <div class="scene-frame__bg"></div>
+      <!-- Phone UI (revealed on Warn Leo) -->
+      <div id="phone-ui" class="phone-ui" role="dialog" aria-label="Text message thread with Leo">
+        <div class="phone-ui__handset">
+          <div class="phone-ui__screen">
+            <div class="phone-ui__contact-bar">LEO (NEIGHBOUR)</div>
+            <div id="phone-thread" class="phone-ui__thread"></div>
+            <div id="phone-send-area" class="phone-ui__send-area">
+              <div class="phone-ui__input-mock"></div>
+              <button id="phone-send-btn" class="phone-ui__send-btn">SEND</button>
+            </div>
+          </div>
+        </div>
+        <p id="phone-tap-hint" style="position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-family:var(--font-body);font-size:0.7rem;color:var(--color-mid-gray);white-space:nowrap;animation:pulse 1.5s infinite;">Tap to advance</p>
+      </div>
+    </div>
+
+    <!-- Below frame: narrative + choices -->
+    <div class="scene-below">
+      <p class="scene-narrative" id="scene1-narrative">"I see a white truck with lumber in the back...<br>they've been sitting there for three hours without getting out."</p>
+      <p class="scene-prompt">What should I do?</p>
+      <div class="choice-pair" id="scene1-choices">
+        <button id="btn-ignore-truck"  class="btn">Ignore truck</button>
+        <button id="btn-warn-leo"      class="btn">Warn Leo</button>
+      </div>
+      <!-- NEXT/RETRY button appears here after overlay -->
+      <div id="scene1-overlay-footer" class="overlay-footer" style="display:none;"></div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SCENE 2 — THE WITNESS
+  ══════════════════════════════════════════════════ -->
+  <section id="screen-scene2" class="screen" aria-label="Scene 2: The Witness">
+
+    <div class="scene-header">
+      <span class="scene-header__title">NEIGHBOURHOOD PROTOCOL</span>
+    </div>
+
+    <div class="scene-frame" id="scene2-frame">
+      <div class="scene-frame__bg" role="img" aria-label="A person films with their phone in a public park"></div>
+      <!-- Camera UI overlays -->
+      <div id="camera-frame" class="camera-frame" aria-hidden="true">
+        <div class="camera-vignette"></div>
+      </div>
+      <div id="camera-rec" class="camera-rec" aria-hidden="true">
+        <div class="camera-rec__dot"></div>
+        <span>REC</span>
+      </div>
+      <div id="camera-timecode" class="camera-timecode" aria-hidden="true">00:00:00</div>
+    </div>
+
+    <div class="scene-below">
+      <p class="scene-narrative">"What a beautiful day in the park.<br>An agent shouts that you're "obstructing."<br>You're standing ten feet away with your phone."</p>
+      <p class="scene-prompt">What should I do?</p>
+      <div class="choice-pair" id="scene2-choices">
+        <button id="btn-go-inside"       class="btn">Go inside</button>
+        <button id="btn-keep-recording"  class="btn">Keep Recording</button>
+      </div>
+      <div id="scene2-overlay-footer" class="overlay-footer" style="display:none;"></div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SCENE 3 — THE GROCERIES
+  ══════════════════════════════════════════════════ -->
+  <section id="screen-scene3" class="screen" aria-label="Scene 3: The Groceries">
+
+    <div class="scene-header">
+      <span class="scene-header__title">NEIGHBOURHOOD PROTOCOL</span>
+    </div>
+
+    <div class="scene-frame" id="scene3-frame">
+      <div class="scene-frame__bg" role="img" aria-label="An apartment building hallway, groceries on the floor"></div>
+    </div>
+
+    <div class="scene-below">
+      <p class="scene-narrative">"Sarah was taken yesterday.<br>She's one of the 1,000 taken today.<br>Her kids are still in the apartment.<br>The neighbourhood fund is covering rent."</p>
+      <p class="scene-prompt">What should I do?</p>
+      <div class="choice-pair" id="scene3-choices">
+        <button id="btn-stay-away"        class="btn">Stay away</button>
+        <button id="btn-bring-groceries"  class="btn">Bring Groceries</button>
+      </div>
+      <div id="scene3-overlay-footer" class="overlay-footer" style="display:none;"></div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       END SCREEN
+  ══════════════════════════════════════════════════ -->
+  <section id="screen-end" class="screen" aria-label="End of experience">
+    <div class="screen__content">
+      <h2 class="end__title">YOU MADE IT THROUGH.</h2>
+      <p class="end__body">Three scenes. Three neighbours. Three moments where ordinary people had to decide what kind of community they lived in.&#10;&#10;The tactics in this experience are documented. The charges are real. The mutual aid networks exist.&#10;&#10;Now you know what to look for.</p>
+      <div class="end__actions">
+        <button id="btn-restart" class="btn btn--large">PLAY AGAIN</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

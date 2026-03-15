@@ -1,0 +1,190 @@
+/* ── Phone UI — Scene 1: Warn Leo ───────────────────── */
+/* Lives inside .scene-frame (white background) */
+
+.phone-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-med);
+}
+
+.phone-ui.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Outer handset shell — replace bg-image when asset is available */
+.phone-ui__handset {
+  position: relative;
+  width: min(360px, 85vw);
+  height: min(640px, 85vh);
+  background-image: url('../assets/images/phone-handset.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Fallback drawn phone shape */
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Fallback: CSS-drawn phone when no asset */
+.phone-ui__handset:not([style*="phone-handset"]) {
+  border: 3px solid var(--color-white);
+  border-radius: 2rem;
+  background: var(--color-dark-gray);
+  box-shadow: 0 0 0 6px var(--color-black), 0 0 0 8px var(--color-dark-gray);
+}
+
+/* Screen area inside the handset */
+.phone-ui__screen {
+  width: 82%;
+  flex: 1;
+  margin: 12% 0 4%;
+  background: var(--color-black);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contact header bar */
+.phone-ui__contact-bar {
+  background: var(--color-dark-gray);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-align: center;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--color-mid-gray);
+  flex-shrink: 0;
+}
+
+/* Scrollable message thread */
+.phone-ui__thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  scrollbar-width: none;
+}
+
+.phone-ui__thread::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual message bubbles */
+.phone-msg {
+  max-width: 78%;
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.phone-msg.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Outgoing (user) messages */
+.phone-msg--out {
+  align-self: flex-end;
+  background: var(--color-white);
+  color: var(--color-black);
+  border-bottom-right-radius: 0.25rem;
+}
+
+/* Incoming from Leo (not used here, available for extension) */
+.phone-msg--in {
+  align-self: flex-start;
+  background: var(--color-dark-gray);
+  color: var(--color-white);
+  border-bottom-left-radius: 0.25rem;
+}
+
+/* Typing indicator */
+.phone-msg--typing {
+  align-self: flex-start;
+  background: var(--color-dark-gray);
+  color: var(--color-mid-gray);
+  font-style: italic;
+}
+
+/* SEND button area */
+.phone-ui__send-area {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 1px solid var(--color-dark-gray);
+  flex-shrink: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-med);
+}
+
+.phone-ui__send-area.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.phone-ui__input-mock {
+  flex: 1;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-mid-gray);
+  background: var(--color-dark-gray);
+}
+
+.phone-ui__send-btn {
+  font-family: var(--font-header);
+  font-size: 0.75rem;
+  background: var(--color-white);
+  color: var(--color-black);
+  border: 2px solid var(--color-white);
+  border-radius: 9999px;
+  padding: 0.3em 0.9em;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.phone-ui__send-btn:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* Tap-to-advance hint */
+.phone-ui__tap-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--color-mid-gray);
+  white-space: nowrap;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}

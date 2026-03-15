@@ -1,0 +1,144 @@
+/* ── Root app shell ─────────────────────────────────── */
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+/* ── Screen base ────────────────────────────────────── */
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+  overflow: hidden;
+}
+
+.screen.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.screen.is-exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Intro content layer ────────────────────────────── */
+
+.screen__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+/* ── Evidence overlay ───────────────────────────────── */
+/* Sits inside .scene-frame, covers the illustration */
+
+.evidence-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.80);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 6vw, 4rem);
+  gap: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.evidence-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Thin top accent line */
+.evidence-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--color-mid-gray);
+}
+
+.evidence-overlay__outcome {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  font-weight: 700;
+  color: var(--color-white);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.evidence-overlay__divider {
+  width: 40px;
+  height: 1px;
+  background: var(--color-mid-gray);
+}
+
+.evidence-overlay__fact {
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.4vw, 0.95rem);
+  font-weight: 700;
+  color: var(--color-light-gray);
+  text-align: center;
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.evidence-overlay__source {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-mid-gray);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── NEXT SCENE / RETRY button — below the frame ──── */
+
+.overlay-footer {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-sm) 0;
+}
+
+/* ── Scan-in animation ──────────────────────────────── */
+
+.evidence-overlay.is-visible .evidence-overlay__outcome,
+.evidence-overlay.is-visible .evidence-overlay__divider,
+.evidence-overlay.is-visible .evidence-overlay__fact,
+.evidence-overlay.is-visible .evidence-overlay__source {
+  animation: slideUp 0.45s ease both;
+}
+
+.evidence-overlay.is-visible .evidence-overlay__divider { animation-delay: 0.1s; }
+.evidence-overlay.is-visible .evidence-overlay__fact    { animation-delay: 0.2s; }
+.evidence-overlay.is-visible .evidence-overlay__source  { animation-delay: 0.3s; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

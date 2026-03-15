@@ -1,0 +1,107 @@
+:root {
+  /* Color Palette */
+  --color-black:      #000000;
+  --color-white:      #FFFFFF;
+  --color-dark-gray:  #333333;
+  --color-mid-gray:   #808080;
+  --color-light-gray: #D3D3D3;
+
+  /* Typography Scale */
+  --text-h1: clamp(4rem, 10vw, 12.5rem);   /* ~200pt at standard DPI */
+  --text-h2: clamp(2.5rem, 6vw, 8.125rem); /* ~130pt */
+  --text-h3: clamp(1.75rem, 4vw, 5rem);    /* ~80pt */
+  --text-body: 1.25rem;                     /* 20pt */
+  --text-small: 1rem;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-med:  0.35s ease;
+  --transition-slow: 0.7s ease;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em 2em;
+  border-radius: 9999px;
+  border: 2px solid var(--color-white);
+  background: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-header);
+  font-size: var(--text-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  user-select: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-white);
+  color: var(--color-black);
+  border-color: var(--color-black);
+  outline: none;
+}
+
+/* On white/light backgrounds — black border, black text */
+.btn--dark {
+  border-color: var(--color-black);
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+.btn--dark:hover,
+.btn--dark:focus-visible {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+.btn--large {
+  font-size: var(--text-h3);
+  padding: 0.6em 1.8em;
+}
+
+/* ── Choice button pair ─────────────────────────────── */
+
+.choice-pair {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Scene label chip ───────────────────────────────── */
+
+.scene-label {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-mid-gray);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ── Narrative text ─────────────────────────────────── */
+
+.narrative-text {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.narrative-text--dark {
+  color: var(--color-black);
+}

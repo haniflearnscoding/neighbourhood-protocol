@@ -1,0 +1,116 @@
+/* ── Evidence Overlay ───────────────────────────────── */
+/* Applied over a dimmed scene background (brightness reduced via scenes.css) */
+
+.evidence-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.70);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 8vw, 6rem);
+  gap: var(--space-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.evidence-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* State coloring — thin top accent line */
+.evidence-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+}
+
+.evidence-overlay.success::before {
+  background: var(--color-light-gray);
+}
+
+.evidence-overlay.failure::before {
+  background: var(--color-mid-gray);
+}
+
+/* ── Outcome statement ─────────────────────────────── */
+
+.evidence-overlay__outcome {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--color-white);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+/* ── Horizontal rule ───────────────────────────────── */
+
+.evidence-overlay__divider {
+  width: 50px;
+  height: 1px;
+  background: var(--color-mid-gray);
+}
+
+/* ── Fact paragraph ────────────────────────────────── */
+
+.evidence-overlay__fact {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 700;
+  color: var(--color-light-gray);
+  text-align: center;
+  line-height: 1.85;
+  max-width: 600px;
+}
+
+/* ── Source citation ───────────────────────────────── */
+
+.evidence-overlay__source {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-mid-gray);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Action button ─────────────────────────────────── */
+
+.evidence-overlay__action {
+  margin-top: var(--space-sm);
+}
+
+/* ── Scan-in animation for overlay content ─────────── */
+
+.evidence-overlay.is-visible .evidence-overlay__outcome,
+.evidence-overlay.is-visible .evidence-overlay__divider,
+.evidence-overlay.is-visible .evidence-overlay__fact,
+.evidence-overlay.is-visible .evidence-overlay__source,
+.evidence-overlay.is-visible .evidence-overlay__action {
+  animation: slideUp 0.5s ease both;
+}
+
+.evidence-overlay.is-visible .evidence-overlay__divider { animation-delay: 0.15s; }
+.evidence-overlay.is-visible .evidence-overlay__fact    { animation-delay: 0.25s; }
+.evidence-overlay.is-visible .evidence-overlay__source  { animation-delay: 0.35s; }
+.evidence-overlay.is-visible .evidence-overlay__action  { animation-delay: 0.5s; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
