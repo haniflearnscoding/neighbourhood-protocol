@@ -95,21 +95,28 @@ function handleTransition(from, to) {
 }
 
 function truckArrival() {
-  const img   = document.getElementById('scene1-img');
-  const below = document.querySelector('#screen-scene1 .scene-below');
+  const img      = document.getElementById('scene1-img');
+  const narrative = document.querySelector('#screen-scene1 .scene-narrative');
+  const prompt    = document.querySelector('#screen-scene1 .scene-prompt');
+  const choices   = document.querySelector('#screen-scene1 .choice-pair');
 
-  // Reset: notruck image, below hidden
+  // Reset: notruck image, narrative + buttons hidden
   img.src = 'assets/images/scene1-notruck.png';
-  below.classList.add('is-hidden');
+  [narrative, prompt, choices].forEach(el => el.classList.add('is-hidden'));
 
-  // After 2.5s: fade out image, swap src, fade back in
+  // After 2.5s: fade out image, swap to truck
   setTimeout(() => {
     img.classList.add('is-swapping');
     setTimeout(() => {
       img.src = 'assets/images/xd/Scene 1 - Choice.png';
       img.classList.remove('is-swapping');
-      // Reveal narrative + buttons after image settles
-      setTimeout(() => below.classList.remove('is-hidden'), 400);
+      // Reveal narrative first
+      setTimeout(() => {
+        narrative.classList.remove('is-hidden');
+        prompt.classList.remove('is-hidden');
+        // Then reveal buttons
+        setTimeout(() => choices.classList.remove('is-hidden'), 800);
+      }, 400);
     }, 600);
   }, 2500);
 }
