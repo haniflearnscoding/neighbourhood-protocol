@@ -112,12 +112,16 @@ function truckArrival() {
     requestAnimationFrame(() => el.style.transition = '');
   });
 
+  // Preload truck image now so it's cached when needed
+  new Image().src = 'assets/images/xd/Scene 1 - Choice.png';
+
   // After 2.5s: fade out, swap to truck, fade back in
   setTimeout(() => {
     img.classList.add('is-swapping');
     setTimeout(() => {
       img.src = 'assets/images/xd/Scene 1 - Choice.png';
-      img.classList.remove('is-swapping');
+      // Double RAF: let browser paint new src before starting fade-in
+      requestAnimationFrame(() => requestAnimationFrame(() => img.classList.remove('is-swapping')));
 
       // Narrative appears after image fades back in
       setTimeout(() => {
