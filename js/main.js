@@ -21,6 +21,7 @@ function handleTransition(from, to) {
     case STATES.SCENE_1:
       deactivatePhoneUI();
       activateScreen('screen-scene1');
+      truckArrival();
       break;
 
     case STATES.SCENE_1_PHONE:
@@ -91,6 +92,26 @@ function handleTransition(from, to) {
       activateScreen('screen-end');
       break;
   }
+}
+
+function truckArrival() {
+  const img   = document.getElementById('scene1-img');
+  const below = document.querySelector('#screen-scene1 .scene-below');
+
+  // Reset: notruck image, below hidden
+  img.src = 'assets/images/scene1-notruck.png';
+  below.classList.add('is-hidden');
+
+  // After 2.5s: fade out image, swap src, fade back in
+  setTimeout(() => {
+    img.classList.add('is-swapping');
+    setTimeout(() => {
+      img.src = 'assets/images/xd/Scene 1 - Choice.png';
+      img.classList.remove('is-swapping');
+      // Reveal narrative + buttons after image settles
+      setTimeout(() => below.classList.remove('is-hidden'), 400);
+    }, 600);
+  }, 2500);
 }
 
 function bindIntro() {
