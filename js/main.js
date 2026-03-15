@@ -100,9 +100,13 @@ function truckArrival() {
   const prompt    = document.querySelector('#screen-scene1 .scene-prompt');
   const choices   = document.querySelector('#screen-scene1 .choice-pair');
 
-  // Reset: no-truck image, narrative + buttons hidden
+  // Reset: no-truck image, hide instantly (suppress transition)
   img.src = 'assets/images/xd/Scene 1 – 1.2.png';
-  [narrative, prompt, choices].forEach(el => el.classList.add('is-hidden'));
+  [narrative, prompt, choices].forEach(el => {
+    el.style.transition = 'none';
+    el.classList.add('is-hidden');
+    requestAnimationFrame(() => el.style.transition = '');
+  });
 
   // After 2.5s: fade out, swap to truck, fade back in
   setTimeout(() => {
@@ -111,12 +115,14 @@ function truckArrival() {
       img.src = 'assets/images/xd/Scene 1 - Choice.png';
       img.classList.remove('is-swapping');
 
-      // Narrative fades in with the truck
-      narrative.classList.remove('is-hidden');
-      prompt.classList.remove('is-hidden');
+      // Narrative appears after image fades back in
+      setTimeout(() => {
+        narrative.classList.remove('is-hidden');
+        prompt.classList.remove('is-hidden');
 
-      // Buttons appear after narrative has settled
-      setTimeout(() => choices.classList.remove('is-hidden'), 1200);
+        // Buttons follow narrative
+        setTimeout(() => choices.classList.remove('is-hidden'), 800);
+      }, 600);
     }, 600);
   }, 2500);
 }
