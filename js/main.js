@@ -101,7 +101,7 @@ function truckArrival() {
   const choices   = document.querySelector('#screen-scene1 .choice-pair');
 
   // Reset: notruck image, narrative + buttons hidden
-  img.src = 'assets/images/scene1-notruck.png';
+  img.src = 'assets/images/xd/Scene 1 – 1.2.png';
   [narrative, prompt, choices].forEach(el => el.classList.add('is-hidden'));
 
   // After 2.5s: fade out image, swap to truck
