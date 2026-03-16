@@ -15,6 +15,12 @@ export function activatePhoneUI(onSend) {
   if (prompt)    prompt.style.display    = 'none';
   if (narrative) narrative.style.display = 'none';
 
+  // Hide character and truck overlays
+  const character = document.getElementById('scene1-character');
+  const truck     = document.getElementById('scene1-truck');
+  if (character) character.classList.remove('is-visible');
+  if (truck)     truck.classList.remove('is-visible');
+
   // Crossfade to phone illustration
   img.classList.add('is-swapping');
   setTimeout(() => {

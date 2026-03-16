@@ -43,7 +43,9 @@
 
     <!-- Illustration frame -->
     <div class="scene-frame" id="scene1-frame">
-      <img id="scene1-img" class="scene-frame__img" src="assets/images/xd/Scene 1 – 1.2.png" alt="A person watches from a window as a white truck idles outside">
+      <img id="scene1-img" class="scene-frame__img" src="assets/images/all-scenes/Scene 1 – 1.png" alt="A quiet neighbourhood street">
+      <img id="scene1-character" class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/all-scenes/Scene 1 – 2.png" alt="" aria-hidden="true">
+      <img id="scene1-truck" class="scene-frame__overlay scene-frame__overlay--truck" src="assets/images/all-scenes/Scene 1 - Truck arrives copy 3.png" alt="" aria-hidden="true">
     </div>
 
     <!-- Below frame: narrative + choices -->
@@ -70,7 +72,7 @@
     </div>
 
     <div class="scene-frame" id="scene2-frame">
-      <div class="scene-frame__bg" role="img" aria-label="A person films with their phone in a public park"></div>
+      <img id="scene2-img" class="scene-frame__img" src="assets/images/all-scenes/Scene 2 – 5.png" alt="A bus stop where a person sits while another watches nearby">
       <!-- Camera UI overlays -->
       <div id="camera-frame" class="camera-frame" aria-hidden="true">
         <div class="camera-vignette"></div>
@@ -83,9 +85,9 @@
     </div>
 
     <div class="scene-below">
-      <p class="scene-narrative">"What a beautiful day in the park.<br>An agent shouts that you're "obstructing."<br>You're standing ten feet away with your phone."</p>
-      <p class="scene-prompt">What should I do?</p>
-      <div class="choice-pair" id="scene2-choices">
+      <p class="scene-narrative is-hidden">"What a beautiful day in the park.<br>An agent shouts that you're "obstructing."<br>You're standing ten feet away with your phone."</p>
+      <p class="scene-prompt is-hidden">What should I do?</p>
+      <div class="choice-pair is-hidden" id="scene2-choices">
         <button id="btn-go-inside"       class="btn">Go inside</button>
         <button id="btn-keep-recording"  class="btn">Keep Recording</button>
       </div>
@@ -104,13 +106,13 @@
     </div>
 
     <div class="scene-frame" id="scene3-frame">
-      <div class="scene-frame__bg" role="img" aria-label="An apartment building hallway, groceries on the floor"></div>
+      <img id="scene3-img" class="scene-frame__img" src="assets/images/all-scenes/Scene 3 – 2.png" alt="A person stands in a grocery store aisle looking at the shelves">
     </div>
 
     <div class="scene-below">
-      <p class="scene-narrative">"Sarah was taken yesterday.<br>She's one of the 1,000 taken today.<br>Her kids are still in the apartment.<br>The neighbourhood fund is covering rent."</p>
-      <p class="scene-prompt">What should I do?</p>
-      <div class="choice-pair" id="scene3-choices">
+      <p class="scene-narrative is-hidden">"Sarah was taken yesterday.<br>She's one of the 1,000 taken today.<br>Her kids are still in the apartment.<br>The neighbourhood fund is covering rent."</p>
+      <p class="scene-prompt is-hidden">What should I do?</p>
+      <div class="choice-pair is-hidden" id="scene3-choices">
         <button id="btn-stay-away"        class="btn">Stay away</button>
         <button id="btn-bring-groceries"  class="btn">Bring Groceries</button>
       </div>
