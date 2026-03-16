@@ -104,6 +104,16 @@
   mix-blend-mode: multiply;
 }
 
+/* Camera frame (line art on white): multiply makes white transparent, ink stays */
+.scene-frame__overlay--camera {
+  mix-blend-mode: multiply;
+}
+
+/* Vignette: semi-transparent so scene shows through the grey border */
+#scene2-camera-vignette.is-visible {
+  opacity: 0.5;
+}
+
 /* Truck slides in from the left — needs transparent background PNG export */
 .scene-frame__overlay--truck {
   transform: translateX(-22%);

@@ -1,21 +1,31 @@
 import { Engine, STATES, activateScreen, showOverlay } from './engine.js';
 import { activatePhoneUI, deactivatePhoneUI }           from './scene1.js';
-import { activateCameraUI, cameraSuccess, cameraFailure, deactivateCameraUI } from './scene2.js';
+import { activateFilmingView }                           from './scene2.js';
 import { NARRATIVE }                                     from '../data/narrative.js';
 
 const engine = new Engine();
 
 // AbortController for scene 1 click sequence — cancelled on retry
 let scene1Abort = null;
+let scene2Abort = null;
 
 window.addEventListener('DOMContentLoaded', () => {
-  activateScreen('screen-intro');
-  engine.state = STATES.INTRO;
   bindIntro();
   bindScene1();
   bindScene2();
   bindScene3();
   engine.on('transition', ({ from, to }) => handleTransition(from, to));
+
+  // Debug: append #scene2 / #scene3 to URL to skip to that scene
+  const hash = window.location.hash;
+  if (hash === '#scene2') {
+    engine.transition(STATES.SCENE_2);
+  } else if (hash === '#scene3') {
+    engine.transition(STATES.SCENE_3);
+  } else {
+    activateScreen('screen-intro');
+    engine.state = STATES.INTRO;
+  }
 });
 
 function handleTransition(from, to) {
@@ -56,27 +66,24 @@ function handleTransition(from, to) {
       break;
 
     case STATES.SCENE_2:
-      deactivateCameraUI();
       activateScreen('screen-scene2');
       witnessArrival();
       break;
 
     case STATES.SCENE_2_SUCCESS:
-      setScene2ChoicesVisible(false);
-      cameraSuccess(() => showOverlay(
+      showOverlay(
         'screen-scene2', 'scene2-frame', 'scene2-overlay-footer', 'scene2-choices',
         'success', NARRATIVE.scene2.success, 'NEXT SCENE',
         () => engine.transition(STATES.SCENE_3)
-      ));
+      );
       break;
 
     case STATES.SCENE_2_FAILURE:
-      setScene2ChoicesVisible(false);
-      cameraFailure(() => showOverlay(
+      showOverlay(
         'screen-scene2', 'scene2-frame', 'scene2-overlay-footer', 'scene2-choices',
         'failure', NARRATIVE.scene2.failure, 'RETRY',
-        () => { deactivateCameraUI(); engine.transition(STATES.SCENE_2); }
-      ));
+        () => engine.transition(STATES.SCENE_2)
+      );
       break;
 
     case STATES.SCENE_3:
@@ -252,55 +259,77 @@ function bindScene1() {
 }
 
 function bindScene2() {
-  document.getElementById('btn-keep-recording')
-    .addEventListener('click', () => engine.transition(STATES.SCENE_2_SUCCESS));
-  document.getElementById('btn-go-inside')
+  document.getElementById('btn-film')
+    .addEventListener('click', () =>
+      activateFilmingView(() => engine.transition(STATES.SCENE_2_SUCCESS))
+    );
+  document.getElementById('btn-flee')
     .addEventListener('click', () => engine.transition(STATES.SCENE_2_FAILURE));
 }
 
-function setScene2ChoicesVisible(visible) {
-  const choices = document.getElementById('scene2-choices');
-  const prompt  = document.querySelector('#screen-scene2 .scene-prompt');
-  if (!visible) {
-    if (choices) choices.style.display = 'none';
-    if (prompt)  prompt.style.display  = 'none';
-  } else {
-    if (choices) { choices.style.display = ''; choices.classList.remove('is-hidden'); }
-    if (prompt)  { prompt.style.display  = ''; prompt.classList.remove('is-hidden'); }
-  }
-}
-
 function witnessArrival() {
-  const img       = document.getElementById('scene2-img');
-  const narrative = document.querySelector('#screen-scene2 .scene-narrative');
-  const prompt    = document.querySelector('#screen-scene2 .scene-prompt');
-  const choices   = document.getElementById('scene2-choices');
+  if (scene2Abort) scene2Abort.abort();
+  scene2Abort = new AbortController();
+  const { signal } = scene2Abort;
 
-  img.src = 'assets/images/all-scenes/Scene 2 \u2013 5.png';
-  [narrative, prompt].forEach(el => {
+  const img         = document.getElementById('scene2-img');
+  const userCalm    = document.getElementById('scene2-user-calm');
+  const userShocked = document.getElementById('scene2-user-shocked');
+  const ice         = document.getElementById('scene2-ice');
+  const narrative   = document.querySelector('#screen-scene2 .scene-narrative');
+  const prompt      = document.querySelector('#screen-scene2 .scene-prompt');
+  const choices     = document.getElementById('scene2-choices');
+  const frame       = document.getElementById('scene2-frame');
+
+  const cop            = document.getElementById('scene2-cop');
+  const cameraVignette = document.getElementById('scene2-camera-vignette');
+  const cameraFrame    = document.getElementById('scene2-camera-frame');
+
+  // Reset — background only, all overlays hidden
+  img.src = 'assets/images/all-scenes/Scene 2 \u2013 1.png';
+  img.classList.remove('is-swapping');
+  [userCalm, userShocked, ice, cop, cameraVignette, cameraFrame].forEach(el => el && el.classList.remove('is-visible'));
+  [narrative, prompt, choices].forEach(el => {
     el.style.display = '';
     el.style.transition = 'none';
     el.classList.add('is-hidden');
     requestAnimationFrame(() => el.style.transition = '');
   });
-  choices.classList.add('is-hidden');
-  choices.style.display = '';
 
-  activateCameraUI();
+  // Preload
+  new Image().src = 'assets/images/all-scenes/Scene 2 \u2013 3.png';
+  new Image().src = 'assets/images/all-scenes/Scene 2 \u2013 5.png';
 
-  setTimeout(() => {
-    img.classList.add('is-swapping');
+  // ── Phase 0 → 1: click → witness arrives (calm) ──
+  frame.classList.add('is-clickable');
+  frame.addEventListener('click', function onPhase1() {
+    frame.classList.remove('is-clickable');
+    userCalm.classList.add('is-visible');
+
+    // ── Phase 1 → 2: click → ICE arrives, witness reacts ──
     setTimeout(() => {
-      img.src = 'assets/images/all-scenes/Scene 2 \u2013 3.png';
-      requestAnimationFrame(() => requestAnimationFrame(() => img.classList.remove('is-swapping')));
+      if (signal.aborted) return;
+      frame.classList.add('is-clickable');
+      frame.addEventListener('click', function onPhase2() {
+        frame.classList.remove('is-clickable');
 
-      setTimeout(() => {
-        narrative.classList.remove('is-hidden');
-        prompt.classList.remove('is-hidden');
-        setTimeout(() => choices.classList.remove('is-hidden'), 800);
-      }, 600);
-    }, 600);
-  }, 2000);
+        // Swap background instantly — overlays cover the cut
+        img.src = 'assets/images/all-scenes/Scene 2 \u2013 3.png';
+
+        // Swap character state and reveal ICE
+        userCalm.classList.remove('is-visible');
+        userShocked.classList.add('is-visible');
+        ice.classList.add('is-visible');
+
+        setTimeout(() => {
+          if (signal.aborted) return;
+          narrative.classList.remove('is-hidden');
+          prompt.classList.remove('is-hidden');
+          setTimeout(() => choices.classList.remove('is-hidden'), 800);
+        }, 800);
+      }, { once: true, signal });
+    }, 700);
+  }, { once: true, signal });
 }
 
 function groceryArrival() {

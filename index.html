@@ -72,24 +72,21 @@
     </div>
 
     <div class="scene-frame" id="scene2-frame">
-      <img id="scene2-img" class="scene-frame__img" src="assets/images/all-scenes/Scene 2 – 5.png" alt="A bus stop where a person sits while another watches nearby">
-      <!-- Camera UI overlays -->
-      <div id="camera-frame" class="camera-frame" aria-hidden="true">
-        <div class="camera-vignette"></div>
-      </div>
-      <div id="camera-rec" class="camera-rec" aria-hidden="true">
-        <div class="camera-rec__dot"></div>
-        <span>REC</span>
-      </div>
-      <div id="camera-timecode" class="camera-timecode" aria-hidden="true">00:00:00</div>
+      <img id="scene2-img"          class="scene-frame__img" src="assets/images/all-scenes/Scene 2 – 1.png" alt="A person sits at a bus stop reading">
+      <img id="scene2-user-calm"    class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/all-scenes/Scene 2 – 9 - user.png"  alt="" aria-hidden="true">
+      <img id="scene2-user-shocked" class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/all-scenes/Scene 2 – 10 - user.png" alt="" aria-hidden="true">
+      <img id="scene2-ice"          class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/all-scenes/Scene 2 – 11 - user.png" alt="" aria-hidden="true">
+      <img id="scene2-cop"          class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/all-scenes/Scene 2 – 10 - cop.png" alt="" aria-hidden="true">
+      <img id="scene2-camera-vignette" class="scene-frame__overlay scene-frame__overlay--camera" src="assets/images/all-scenes/Scene 2 – 11.png"   alt="" aria-hidden="true">
+      <img id="scene2-camera-frame"    class="scene-frame__overlay scene-frame__overlay--camera" src="assets/images/all-scenes/Scene 2 – 11-2.png" alt="" aria-hidden="true">
     </div>
 
     <div class="scene-below">
-      <p class="scene-narrative is-hidden">"What a beautiful day in the park.<br>An agent shouts that you're "obstructing."<br>You're standing ten feet away with your phone."</p>
+      <p class="scene-narrative is-hidden">"An agent shouts that you're obstructing.<br>You're standing ten feet away with your phone."</p>
       <p class="scene-prompt is-hidden">What should I do?</p>
       <div class="choice-pair is-hidden" id="scene2-choices">
-        <button id="btn-go-inside"       class="btn">Go inside</button>
-        <button id="btn-keep-recording"  class="btn">Keep Recording</button>
+        <button id="btn-flee"  class="btn">Flee the scene</button>
+        <button id="btn-film"  class="btn">Film the scene</button>
       </div>
       <div id="scene2-overlay-footer" class="overlay-footer" style="display:none;"></div>
     </div>
