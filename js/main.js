@@ -73,8 +73,8 @@ function handleTransition(from, to) {
     case STATES.SCENE_2_SUCCESS:
       showOverlay(
         'screen-scene2', 'scene2-frame', 'scene2-overlay-footer', 'scene2-choices',
-        'success', NARRATIVE.scene2.success, 'NEXT SCENE',
-        () => engine.transition(STATES.SCENE_3)
+        'success', NARRATIVE.scene2.success, 'BACK TO START',
+        () => engine.transition(STATES.INTRO)
       );
       break;
 
