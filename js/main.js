@@ -297,8 +297,7 @@ function witnessArrival() {
   });
 
   // Preload
-  new Image().src = 'assets/images/all-scenes/Scene 2 \u2013 3.png';
-  new Image().src = 'assets/images/all-scenes/Scene 2 \u2013 5.png';
+  new Image().src = 'assets/images/all-scenes/Scene 2 \u2013 21.png';
 
   // ── Phase 0 → 1: click → witness arrives (calm) ──
   frame.classList.add('is-clickable');
@@ -313,20 +312,24 @@ function witnessArrival() {
       frame.addEventListener('click', function onPhase2() {
         frame.classList.remove('is-clickable');
 
-        // Swap background instantly — overlays cover the cut
-        img.src = 'assets/images/all-scenes/Scene 2 \u2013 3.png';
-
-        // Swap character state and reveal ICE
+        // Crossfade background: fade out, swap src, fade back in
         userCalm.classList.remove('is-visible');
-        userShocked.classList.add('is-visible');
-        ice.classList.add('is-visible');
+        img.classList.add('is-swapping');
 
         setTimeout(() => {
           if (signal.aborted) return;
-          narrative.classList.remove('is-hidden');
-          prompt.classList.remove('is-hidden');
-          setTimeout(() => choices.classList.remove('is-hidden'), 800);
-        }, 800);
+          img.src = 'assets/images/all-scenes/Scene 2 \u2013 21.png';
+          img.classList.remove('is-swapping');
+          userShocked.classList.add('is-visible');
+          ice.classList.add('is-visible');
+
+          setTimeout(() => {
+            if (signal.aborted) return;
+            narrative.classList.remove('is-hidden');
+            prompt.classList.remove('is-hidden');
+            setTimeout(() => choices.classList.remove('is-hidden'), 800);
+          }, 800);
+        }, 300);
       }, { once: true, signal });
     }, 700);
   }, { once: true, signal });

@@ -109,6 +109,12 @@
   mix-blend-mode: multiply;
 }
 
+/* Solid overlay — transparent PNG, no blend, renders above camera layers */
+.scene-frame__overlay--solid {
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
 /* Vignette: semi-transparent so scene shows through the grey border */
 #scene2-camera-vignette.is-visible {
   opacity: 0.5;

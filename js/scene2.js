@@ -15,11 +15,9 @@ export function activateFilmingView(onRecord) {
   if (choices) choices.style.display = 'none';
   if (prompt)  prompt.style.display  = 'none';
 
-  // Swap ICE overlay: hide old, show cop variant
-  ['scene2-user-calm', 'scene2-user-shocked', 'scene2-ice'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('is-visible');
-  });
+  // Hide calm state; keep shocked user + ICE visible during filming
+  const userCalm = document.getElementById('scene2-user-calm');
+  if (userCalm) userCalm.classList.remove('is-visible');
   if (cop) cop.classList.add('is-visible');
 
   // Fade in both camera overlays — vignette darkens edges, frame shows UI
