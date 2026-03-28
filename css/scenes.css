@@ -113,7 +113,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .warning-input-hint {
@@ -124,20 +124,27 @@
   letter-spacing: 0.05em;
 }
 
+.warning-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .warning-input {
   background: transparent;
   border: none;
   border-bottom: 2px solid var(--color-black);
   font-family: var(--font-header);
   font-size: 1.4rem;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.35em;
   color: var(--color-black);
   text-align: center;
-  width: 220px;
-  padding: 0.2em 0.5em;
+  width: 200px;
+  padding: 0.2em 0.4em;
   outline: none;
   caret-color: var(--color-black);
   text-transform: uppercase;
+  transition: border-color var(--transition-fast);
 }
 
 .warning-input::placeholder {
@@ -146,6 +153,25 @@
   letter-spacing: 0.05em;
   color: var(--color-light-gray);
   text-transform: none;
+}
+
+.warning-input.is-wrong {
+  border-bottom-color: #c0392b;
+  animation: inputShake 0.4s ease;
+}
+
+.warning-send-btn {
+  font-size: 0.7rem !important;
+  padding: 0.4em 1.1em !important;
+}
+
+@keyframes inputShake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-6px); }
+  45%  { transform: translateX(6px); }
+  65%  { transform: translateX(-4px); }
+  82%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
 }
 
 /* ── Persistent scene header ────────────────────────── */
