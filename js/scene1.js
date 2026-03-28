@@ -178,11 +178,23 @@ export function activateScene1(onSuccess, onFailure) {
 
       // ── 4. FRAME SHAKE ──────────────────────────────────
       hideLine();
-      frame.classList.add('is-shaking');
-      await new Promise(res =>
-        frame.addEventListener('animationend', res, { once: true })
-      );
-      frame.classList.remove('is-shaking');
+      await new Promise(res => {
+        gsap.timeline({ onComplete: res })
+          // slow build — unease creeping in
+          .to(frame, { x: -4,  y: 2,  rotation: -0.5, duration: 0.12, ease: 'power1.in'    })
+          .to(frame, { x: 8,   y: -4, rotation: 1.4,  duration: 0.09, ease: 'power2.out'   })
+          .to(frame, { x: -11, y: 5,  rotation: -2,   duration: 0.09, ease: 'power2.inOut' })
+          // peak
+          .to(frame, { x: 13,  y: -5, rotation: 2.2,  duration: 0.08, ease: 'power3.inOut' })
+          .to(frame, { x: -10, y: 5,  rotation: -1.8, duration: 0.08, ease: 'power2.inOut' })
+          // decay
+          .to(frame, { x: 8,   y: -3, rotation: 1.3,  duration: 0.09, ease: 'power2.inOut' })
+          .to(frame, { x: -5,  y: 2,  rotation: -0.8, duration: 0.08, ease: 'power2.inOut' })
+          .to(frame, { x: 3,   y: -1, rotation: 0.4,  duration: 0.07, ease: 'power2.out'   })
+          // elastic settle
+          .to(frame, { x: 0,   y: 0,  rotation: 0,    duration: 0.6,  ease: 'elastic.out(1, 0.35)' })
+          .call(() => gsap.set(frame, { clearProps: 'all' }));
+      });
 
       await typewriteLine(S.suspiciousLines[0]);
       hideLine();

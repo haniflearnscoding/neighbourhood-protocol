@@ -90,22 +90,7 @@
   color: var(--color-mid-gray);
 }
 
-/* ── Frame shake animation ───────────────────────────── */
-
-.scene-frame.is-shaking {
-  animation: frameShake 0.7s ease;
-}
-
-@keyframes frameShake {
-  0%   { transform: translate(0, 0); }
-  10%  { transform: translate(-5px, 3px); }
-  25%  { transform: translate(5px, -3px); }
-  40%  { transform: translate(-4px, 3px); }
-  55%  { transform: translate(4px, -2px); }
-  70%  { transform: translate(-2px, 2px); }
-  85%  { transform: translate(2px, -1px); }
-  100% { transform: translate(0, 0); }
-}
+/* .scene-frame.is-shaking handled by GSAP timeline in scene1.js */
 
 /* ── WARNING keyboard input ──────────────────────────── */
 
