@@ -9,22 +9,49 @@ export const NARRATIVE = {
   scene1: {
     label: "THE LOOKOUT",
     number: "01",
-    text: "I see a white truck with lumber in the back...\nthey've been sitting there for three hours\nwithout getting out.",
+
+    // Dialogue — dark phase (before scene reveals)
+    darkLine: "There goes another morning. I'm so tired… maybe I'll just skip class today. My head is killing me.",
+
+    // After scene reveals: character at window
+    atWindowLines: [
+      "Ugh, I feel so sluggish. I really need to stop staying up so late.",
+      "At least the neighbourhood is quiet for once… maybe the silence will help the headache.",
+    ],
+
+    // After truck arrives
+    truckLines: [
+      "Wait… what is that? I've never seen that truck before. Did Leo call someone? Or is he expecting a delivery?",
+      "Who's even in there? I can't tell. The tint on the windows is so dark, I can't see shit. It's just… sitting there.",
+    ],
+
+    // After frame shake
+    suspiciousLines: [
+      "I don't know how I feel about this. It's too early for construction, and they haven't even gotten out of the car. This is beyond suspicious.",
+      "Should I warn Leo? What if I'm just being paranoid? I don't want to overstep, but something feels… off. Like, really off.",
+    ],
+
+    prompt: "What should I do?",
+
+    // Ignore branch
+    ignoreLines: [
+      "I'm just overthinking things. I shouldn't jump to conclusions. I've been watching too many movies…",
+      "I'm sure it's nothing. I should just mind my own business. I'm going to make some coffee and forget I saw that truck.",
+      "It's probably just the city fixing a pipe. Yeah. Just a pipe.",
+    ],
+
+    // Warn branch
+    warnLines: [
+      "Yeah, this is way too weird. It's bothering me too much to just sit here. I'm warning Leo.",
+      "If I'm wrong, I'm just the 'crazy neighbour.' But if I'm right… I can't just watch this happen.",
+    ],
+    warningHint: "Type WARNING to alert Leo",
+
     choices: {
       action: "Warn Leo",
-      ignore: "Ignore truck"
+      ignore: "Ignore truck",
     },
-    phone: {
-      contact: "LEO (NEIGHBOUR)",
-      messages: [
-        "Hey Leo.",
-        "Don't go outside right now.",
-        "There's a white truck on the block — been sitting there for hours. No one gets out.",
-        "Lumber in the back but nothing's been unloaded.",
-        "Just stay inside until it moves.",
-      ],
-      send: "SEND"
-    },
+
     success: {
       outcome: "You chose to warn Leo. You decided to follow your gut, and your action saved him.",
       fact: "Community phone trees and neighbourhood alert networks have directly disrupted ICE operations in cities like Chicago, Los Angeles, and Minneapolis. A 2026 AP investigation found that 'ruse' arrests — using high-visibility vests, utility trucks, and unmarked vehicles — account for over 40% of residential ICE operations. Knowing the signs and sharing them is a protected act of community care.",

@@ -40,6 +40,114 @@
   overflow: hidden;
 }
 
+/* ── Scene 1: dark intro state ──────────────────────── */
+
+#screen-scene1 {
+  transition: background-color var(--transition-slow);
+}
+
+#screen-scene1.is-dark {
+  background-color: var(--color-black);
+}
+
+#screen-scene1.is-dark .scene-narrative {
+  color: var(--color-white);
+}
+
+#screen-scene1.is-dark .scene-header__title {
+  color: var(--color-white);
+}
+
+/* Whole-screen click cursor during dialogue phases */
+.screen.is-clickable-scene {
+  cursor: pointer;
+}
+
+/* ── Tap-to-continue hint ────────────────────────────── */
+
+.tap-hint {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--color-mid-gray);
+  letter-spacing: 0.12em;
+  text-align: center;
+  height: 1.2em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-med);
+}
+
+.tap-hint.is-visible {
+  animation: tapPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes tapPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.85; }
+}
+
+#screen-scene1.is-dark .tap-hint {
+  color: var(--color-mid-gray);
+}
+
+/* ── Frame shake animation ───────────────────────────── */
+
+.scene-frame.is-shaking {
+  animation: frameShake 0.7s ease;
+}
+
+@keyframes frameShake {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-5px, 3px); }
+  25%  { transform: translate(5px, -3px); }
+  40%  { transform: translate(-4px, 3px); }
+  55%  { transform: translate(4px, -2px); }
+  70%  { transform: translate(-2px, 2px); }
+  85%  { transform: translate(2px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── WARNING keyboard input ──────────────────────────── */
+
+.warning-input-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.warning-input-hint {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--color-mid-gray);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.warning-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-black);
+  font-family: var(--font-header);
+  font-size: 1.4rem;
+  letter-spacing: 0.4em;
+  color: var(--color-black);
+  text-align: center;
+  width: 220px;
+  padding: 0.2em 0.5em;
+  outline: none;
+  caret-color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.warning-input::placeholder {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--color-light-gray);
+  text-transform: none;
+}
+
 /* ── Persistent scene header ────────────────────────── */
 
 .scene-header {
