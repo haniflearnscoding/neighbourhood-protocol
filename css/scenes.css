@@ -46,6 +46,10 @@
   transition: background-color var(--transition-slow);
 }
 
+#screen-scene1 .scene-header__title {
+  transition: color var(--transition-slow);
+}
+
 #screen-scene1.is-dark {
   background-color: var(--color-black);
 }
@@ -157,6 +161,15 @@
   65%  { transform: translateX(-4px); }
   82%  { transform: translateX(4px); }
   100% { transform: translateX(0); }
+}
+
+/* Scene 1 footer (warning input) — absolutely positioned so it overlays
+   the invisible choice-pair slot without reflowing .scene-below */
+#scene1-overlay-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 /* ── Persistent scene header ────────────────────────── */
@@ -281,6 +294,7 @@
 /* ── Below-frame content — compact, fixed height ────── */
 
 .scene-below {
+  position: relative; /* anchor for absolutely-positioned overlay-footer */
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -299,6 +313,7 @@
   font-weight: 700;
   color: var(--color-black);
   line-height: 1.5;
+  min-height: 3em; /* 2 lines × 1.5 line-height — prevents frame jump when textContent is cleared */
 }
 
 .scene-prompt {

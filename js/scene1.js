@@ -31,6 +31,7 @@ export function activateScene1(onSuccess, onFailure) {
 
   img.style.transition = 'none';
   img.classList.add('is-swapping');
+  img.src = 'assets/images/all-scenes/Scene 1 \u2013 1.png';
   truck.style.transition = 'none';
   truck.classList.remove('is-visible');
   character.classList.remove('is-visible');
@@ -90,9 +91,9 @@ export function activateScene1(onSuccess, onFailure) {
       narrative.classList.remove('is-hidden');
 
       const charDelay = (ch) => {
-        if ('.!?…'.includes(ch)) return 190;
-        if (ch === ',')           return 120;
-        return 34;
+        if ('.!?…'.includes(ch)) return 150;
+        if (ch === ',')           return 90;
+        return 25;
       };
 
       const tick = () => {
@@ -208,7 +209,6 @@ export function activateScene1(onSuccess, onFailure) {
 
       const branch = await waitChoice();
       choices.classList.add('is-hidden');
-      choices.style.display = 'none';
       prompt.classList.add('is-hidden');
 
       // ── 6A. IGNORE PATH ─────────────────────────────────

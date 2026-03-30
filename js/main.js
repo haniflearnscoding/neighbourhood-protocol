@@ -170,6 +170,12 @@ function morphIntroToHeader() {
       // Step 2: NOW switch pages — title is already in the header position
       activateScreen('screen-scene1');
 
+      // Transition clone from black → white in sync with the scene fade-in,
+      // so it matches the dark header it's about to hand off to (avoids the
+      // clone disappearing into the black bg then white text popping in).
+      clone.style.transition = 'color 0.7s ease';
+      clone.style.color      = 'var(--color-white)';
+
       // Step 3: once the screen cross-fade finishes, swap clone for real header
       setTimeout(() => {
         toEl.style.opacity       = '';
