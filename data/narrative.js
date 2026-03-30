@@ -67,11 +67,51 @@ export const NARRATIVE = {
   scene2: {
     label: "THE WITNESS",
     number: "02",
-    text: "What a beautiful day in the park.\nAn agent shouts that you're \"obstructing.\"\nYou're standing ten feet away with your phone.",
+
+    // Phase 1 — calm arrival at bus stop
+    arrivalLines: [
+      "Sigh… I can't believe I forgot to do groceries last night. This is what I get for being lazy sometimes.",
+      "Now I'm hungry and have to leave the house when all I want to do is rot in bed.",
+      "Hmm.. at least according to my phone, the bus will be here soon…",
+    ],
+
+    // Phase 2 — notices the lady reading
+    lookUpLine: "Damn, look at me staring at my phone all the time. I should probably read a book just like the lady on the bench. My eyes actually hurt.",
+
+    // Phase 3 — ICE agents tackle the girl
+    arrestLines: [
+      'Girl: "AAHHHH! WHAT ARE YOU DOING? GET OFF ME!"',
+      'Agent 1: "SHUT UP! STOP RESISTING!"',
+      'Girl: "YOU CAN\'T DO THIS! YOU\'RE HURTING ME! I AM A U.S. CITIZEN!"',
+      'Agent 2: "WE HAVE AN ORDER. SECURE HER HANDS!"',
+    ],
+
+    // Phase 4 — witness reacts, agent confronts
+    reactionLines: [
+      "OMG! What the fuck??",
+      "They are hurting her! They're literally throwing her onto the pavement!",
+      '"HEY! Leave her alone! What are you doing?!"',
+    ],
+    confrontationLine: 'Agent 1: "STAY BACK! YOU ARE OBSTRUCTING FEDERAL AGENTS. DO YOU WANT TO GET LOCKED UP WITH HER?"',
+    decisionLine: "My heart is pounding so fast I can barely breathe. What should I do? I don't want to get involved and potentially hurt myself... but I can't just stand here and watch this.",
+
+    prompt: "What should I do?",
     choices: {
-      action: "Keep Recording",
-      ignore: "Go inside"
+      action: "Film the scene",
+      ignore: "Flee the scene",
     },
+
+    // Flee branch
+    fleeLines: [
+      "I can't risk it. I need to get out of here before they turn on me, too.",
+    ],
+
+    // Film branch
+    filmLines: [
+      "I'm not leaving her alone here with these fuckers. There's no saying what they will do to her once there's no witness left.",
+      "Holy shit, my hands are shaking so bad... let's hurry before they come for me.",
+    ],
+
     success: {
       outcome: "You kept recording. You held your ground at ten feet. The footage became evidence.",
       fact: "A federal ruling confirmed that filming law enforcement from a \"safe distance\" — established as 10 feet — is a constitutionally protected right under the First Amendment. In January 2026, Reuters documented 650+ \"interference\" charges filed against bystanders who filmed ICE operations. Of those, 91% were later dropped or dismissed. Your camera is a legal tool.",

@@ -236,6 +236,12 @@
   mix-blend-mode: multiply;
 }
 
+/* Scene 2 user overlays are full-colour PNGs — no blend needed */
+#scene2-user-calm,
+#scene2-user-shocked {
+  mix-blend-mode: normal;
+}
+
 /* Camera frame (line art on white): multiply makes white transparent, ink stays */
 .scene-frame__overlay--camera {
   mix-blend-mode: multiply;
