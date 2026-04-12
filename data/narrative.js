@@ -127,11 +127,46 @@ export const NARRATIVE = {
   scene3: {
     label: "THE GROCERIES",
     number: "03",
-    text: "Sarah was taken yesterday.\nShe's one of the 1,000 taken today.\nHer kids are still in the apartment.\nThe neighbourhood fund is covering rent.",
+
+    exteriorLines: [
+      "I'm finally here. There's a lot less people inside than usual. It's... too quiet.",
+      "It must be because everyone is too afraid to leave the house. I can't believe they're targeting people in places like this now. It's disgusting.",
+      "Just the other day, Jeanette — my neighbour — got taken away right at this entrance.",
+      "Let's just make this quick and head back home. I don't want to stay out here longer than I have to.",
+    ],
+
+    aisleLines: [
+      "Okay, focus... Let's see... What do I actually need?",
+      "...Wait.",
+      "With Jeanette gone... who's taking care of her kids? They're only 10 and 12. They can't be on their own.",
+      "Are they even eating? I wonder if they're just sitting in that dark apartment, too terrified to even walk to the corner store.",
+      "I have a little bit of extra cash on me. It was supposed to be for my transit pass next month, but...",
+      "Should I spend it and buy some food for them, or should I save it? I don't know if I can afford to be a hero right now... but I don't know if I can afford to look away either.",
+    ],
+
+    prompt: "What should I do?",
     choices: {
       action: "Bring Groceries",
-      ignore: "Stay away"
+      ignore: "Save the money"
     },
+
+    saveLines: [
+      "I can't. I barely have enough to get through the week as it is. If I spend this, I'm stuck walking three miles to campus every day.",
+      "Someone else will help them. The neighbourhood fund, or a relative... right? I'll just buy enough for myself.",
+      "I'm just a student. I can't carry everyone's problems on my shoulders.",
+    ],
+
+    buyLines: [
+      "Fuck it. It's just money, but for those kids, it's everything right now.",
+      "Jeanette always looked out for me when I first moved here. I can't let her kids sit in a dark kitchen, wondering when their next meal is coming.",
+    ],
+
+    progressHint: "Press spacebar to fill the cart",
+
+    cartFullLines: [
+      "Okay. That's enough to last them a few days. Bread, milk, some fruit... It's not much, but it's a start.",
+      "I'll leave it on the porch. I won't even knock. I don't want to scare them, and I don't want to see the fear in their eyes.",
+    ],
     success: {
       outcome: "You brought groceries. You showed up. The kids ate dinner.",
       fact: "Mutual aid networks in communities under active ICE enforcement have documented measurable outcomes: reduced family displacement, maintained school attendance, and sustained local economic activity. The Deportation Data Project (2025) found that families with active neighbourhood support connections were 3x less likely to lose housing in the 30 days following a primary earner's arrest. Showing up is a structural intervention.",

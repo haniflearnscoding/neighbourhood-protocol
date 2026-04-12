@@ -1,13 +1,13 @@
 import { Engine, STATES, activateScreen, showOverlay } from './engine.js';
 import { activateScene1 }                               from './scene1.js';
 import { activateScene2 }                               from './scene2.js';
+import { activateScene3 }                               from './scene3.js';
 import { NARRATIVE }                                    from '../data/narrative.js';
 
 const engine = new Engine();
 
 window.addEventListener('DOMContentLoaded', () => {
   bindIntro();
-  bindScene3();
   engine.on('transition', ({ from, to }) => handleTransition(from, to));
 
   // Debug: append #scene2 / #scene3 to URL to skip to that scene
@@ -83,7 +83,10 @@ function handleTransition(from, to) {
 
     case STATES.SCENE_3:
       activateScreen('screen-scene3');
-      groceryArrival();
+      activateScene3(
+        () => engine.transition(STATES.SCENE_3_SUCCESS),
+        () => engine.transition(STATES.SCENE_3_FAILURE)
+      );
       break;
 
     case STATES.SCENE_3_SUCCESS:
@@ -194,31 +197,6 @@ function bindIntro() {
     .addEventListener('click', () => engine.transition(STATES.SCENE_1));
 }
 
-
-function groceryArrival() {
-  const narrative = document.querySelector('#screen-scene3 .scene-narrative');
-  const prompt    = document.querySelector('#screen-scene3 .scene-prompt');
-  const choices   = document.getElementById('scene3-choices');
-
-  [narrative, prompt, choices].forEach(el => {
-    el.style.transition = 'none';
-    el.classList.add('is-hidden');
-    requestAnimationFrame(() => el.style.transition = '');
-  });
-
-  setTimeout(() => {
-    narrative.classList.remove('is-hidden');
-    prompt.classList.remove('is-hidden');
-    setTimeout(() => choices.classList.remove('is-hidden'), 800);
-  }, 1200);
-}
-
-function bindScene3() {
-  document.getElementById('btn-bring-groceries')
-    .addEventListener('click', () => engine.transition(STATES.SCENE_3_SUCCESS));
-  document.getElementById('btn-stay-away')
-    .addEventListener('click', () => engine.transition(STATES.SCENE_3_FAILURE));
-}
 
 // End screen restart
 window.addEventListener('DOMContentLoaded', () => {

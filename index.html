@@ -107,15 +107,17 @@
     </div>
 
     <div class="scene-frame" id="scene3-frame">
-      <img id="scene3-img" class="scene-frame__img" src="assets/images/all-scenes/Scene 3 – 2.png" alt="A person stands in a grocery store aisle looking at the shelves">
+      <img id="scene3-img" class="scene-frame__img" src="assets/images/scene3/Scene 3 – 5.png" alt="Front of a supermarket store">
+      <img id="scene3-character" class="scene-frame__overlay scene-frame__overlay--character" src="assets/images/scene3/Scene 3 – 61.png" alt="" aria-hidden="true">
     </div>
 
     <div class="scene-below">
-      <p class="scene-narrative is-hidden">"Sarah was taken yesterday.<br>She's one of the 1,000 taken today.<br>Her kids are still in the apartment.<br>The neighbourhood fund is covering rent."</p>
+      <p class="scene-narrative is-hidden" id="scene3-narrative"></p>
+      <div id="scene3-tap-hint" class="tap-hint">— click to continue —</div>
       <p class="scene-prompt is-hidden">What should I do?</p>
       <div class="choice-pair is-hidden" id="scene3-choices">
-        <button id="btn-stay-away"        class="btn">Stay away</button>
-        <button id="btn-bring-groceries"  class="btn">Bring Groceries</button>
+        <button id="btn-stay-away"       class="btn">Save the money</button>
+        <button id="btn-bring-groceries" class="btn">Bring Groceries</button>
       </div>
       <div id="scene3-overlay-footer" class="overlay-footer" style="display:none;"></div>
     </div>

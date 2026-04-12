@@ -38,6 +38,39 @@
   letter-spacing: 0.05em;
 }
 
+/* ── Scene 3: grocery progress bar ─────────────────── */
+
+.cart-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cart-progress-hint {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--color-mid-gray);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.cart-progress-track {
+  width: 220px;
+  height: 4px;
+  background: var(--color-light-gray);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.cart-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-black);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
 /* ── Mobile block ───────────────────────────────────── */
 
 @media (max-width: 768px) {
@@ -257,11 +290,17 @@
   mix-blend-mode: multiply;
 }
 
-/* Scene 2 user/cop overlays are full-colour PNGs — no blend needed */
+/* Scene 2 user/cop and Scene 3 character — transparent PNGs, no blend needed */
 #scene2-user-calm,
 #scene2-user-shocked,
-#scene2-cop {
+#scene2-cop,
+#scene3-character {
   mix-blend-mode: normal;
+}
+
+/* Scene 3 character appears instantly — no fade */
+#scene3-character {
+  transition: none;
 }
 
 /* Camera frame (line art on white): multiply makes white transparent, ink stays */
