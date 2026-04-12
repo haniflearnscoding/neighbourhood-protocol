@@ -257,9 +257,10 @@
   mix-blend-mode: multiply;
 }
 
-/* Scene 2 user overlays are full-colour PNGs — no blend needed */
+/* Scene 2 user/cop overlays are full-colour PNGs — no blend needed */
 #scene2-user-calm,
-#scene2-user-shocked {
+#scene2-user-shocked,
+#scene2-cop {
   mix-blend-mode: normal;
 }
 

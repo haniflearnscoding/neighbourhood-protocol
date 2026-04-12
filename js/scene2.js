@@ -228,12 +228,16 @@ export function activateScene2(onSuccess, onFailure) {
 
       // ── 6B. FILM PATH ────────────────────────────────────
       } else {
-        // Camera overlays
+        // First line — no camera effect yet
+        await typewriteLine(S.filmLines[0]);
+        hideLine();
+
+        // Camera effect activates on the second line
         camVignette.classList.add('is-visible');
         Object.assign(camFrame.style, {
           position:  'fixed',
           inset:     'auto',
-          width:     '900px',
+          width:     '1100px',
           height:    'auto',
           transform: 'translate(-50%, -50%)',
           zIndex:    '100',
@@ -255,10 +259,8 @@ export function activateScene2(onSuccess, onFailure) {
         };
         signal.addEventListener('abort', cleanupFrame, { once: true });
 
-        for (const line of S.filmLines) {
-          await typewriteLine(line);
-          hideLine();
-        }
+        await typewriteLine(S.filmLines[1]);
+        hideLine();
 
         cleanupFrame();
         onSuccess();
