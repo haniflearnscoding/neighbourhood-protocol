@@ -168,9 +168,9 @@ export const NARRATIVE = {
       "I'll leave it on the porch. I won't even knock. I don't want to scare them, and I don't want to see the fear in their eyes.",
     ],
     success: {
-      outcome: "You brought groceries. You showed up. The kids ate dinner.",
-      fact: "Mutual aid networks in communities under active ICE enforcement have documented measurable outcomes: reduced family displacement, maintained school attendance, and sustained local economic activity. The Deportation Data Project (2025) found that families with active neighbourhood support connections were 3x less likely to lose housing in the 30 days following a primary earner's arrest. Showing up is a structural intervention.",
-      source: "Source: Deportation Data Project (2025); Solidarity Network, \"The Neighbourhood Shield\" (2026)"
+      outcome: "You chose to buy groceries for your neighbours. You ensured that a family remained fed and connected despite the pressure of state surveillance.",
+      fact: "The Electronic Frontier Foundation (EFF) reports that ICE uses a $28 billion budget to track individuals through \"digital breadcrumbs\" like Medicaid, school records, and phone data. This massive surveillance is designed to isolate families and make them too afraid to access basic needs. When the system uses billions to track and divide, mutual aid is the most direct form of resistance.",
+      source: ""
     },
     failure: {
       outcome: "You stayed away. The family disappeared from the neighbourhood within the week.",

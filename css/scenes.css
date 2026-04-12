@@ -38,6 +38,14 @@
   letter-spacing: 0.05em;
 }
 
+/* ── Credits screen ─────────────────────────────────── */
+
+#screen-credits {
+  background: var(--color-white);
+  justify-content: flex-start;
+  padding: 0;
+}
+
 /* ── Scene 3: grocery progress bar ─────────────────── */
 
 .cart-progress-wrap {

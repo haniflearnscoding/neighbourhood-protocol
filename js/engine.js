@@ -15,6 +15,7 @@ export const STATES = {
   SCENE_3_SUCCESS: 'SCENE_3_SUCCESS',
   SCENE_3_FAILURE: 'SCENE_3_FAILURE',
   END:             'END',
+  CREDITS:         'CREDITS',
 };
 
 export class Engine {

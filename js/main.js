@@ -68,8 +68,8 @@ function handleTransition(from, to) {
     case STATES.SCENE_2_SUCCESS:
       showOverlay(
         'screen-scene2', 'scene2-frame', 'scene2-overlay-footer', 'scene2-choices',
-        'success', NARRATIVE.scene2.success, 'BACK TO START',
-        () => engine.transition(STATES.INTRO)
+        'success', NARRATIVE.scene2.success, 'NEXT SCENE',
+        () => engine.transition(STATES.SCENE_3)
       );
       break;
 
@@ -92,8 +92,8 @@ function handleTransition(from, to) {
     case STATES.SCENE_3_SUCCESS:
       showOverlay(
         'screen-scene3', 'scene3-frame', 'scene3-overlay-footer', 'scene3-choices',
-        'success', NARRATIVE.scene3.success, 'NEXT SCENE',
-        () => engine.transition(STATES.END)
+        'success', NARRATIVE.scene3.success, 'END',
+        () => engine.transition(STATES.CREDITS)
       );
       break;
 
@@ -107,6 +107,11 @@ function handleTransition(from, to) {
 
     case STATES.END:
       activateScreen('screen-end');
+      break;
+
+    case STATES.CREDITS:
+      activateScreen('screen-credits');
+      runCredits();
       break;
   }
 }
@@ -198,8 +203,58 @@ function bindIntro() {
 }
 
 
+// ── Credits sequence ──────────────────────────────────
+
+const CREDIT_IMAGES = [
+  'assets/images/scene3/credits/Scene 3 \u2013 13.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 14.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 15.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 16.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 17.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 18.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 36.png',
+];
+
+function runCredits() {
+  const screen     = document.getElementById('screen-credits');
+  const img        = document.getElementById('credits-img');
+  const tapHint    = document.getElementById('credits-tap-hint');
+  const btnRestart = document.getElementById('btn-credits-restart');
+  const abort      = new AbortController();
+  const { signal } = abort;
+
+  let index = 0;
+
+  // Reset
+  img.src = CREDIT_IMAGES[0];
+  img.classList.remove('is-swapping');
+  btnRestart.style.display = 'none';
+  tapHint.classList.add('is-visible');
+  screen.classList.add('is-clickable-scene');
+
+  const advance = () => {
+    index++;
+    if (index >= CREDIT_IMAGES.length) {
+      abort.abort();
+      screen.classList.remove('is-clickable-scene');
+      tapHint.classList.remove('is-visible');
+      btnRestart.style.display = '';
+      return;
+    }
+    img.classList.add('is-swapping');
+    setTimeout(() => {
+      img.src = CREDIT_IMAGES[index];
+      img.classList.remove('is-swapping');
+    }, 500);
+  };
+
+  screen.addEventListener('click', advance, { signal });
+}
+
 // End screen restart
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-restart')
     .addEventListener('click', () => engine.transition(STATES.SCENE_1));
+  document.getElementById('btn-credits-restart')
+    .addEventListener('click', () => engine.transition(STATES.INTRO));
 });
