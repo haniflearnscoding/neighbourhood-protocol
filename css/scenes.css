@@ -29,6 +29,27 @@
   to   { opacity: 1; }
 }
 
+.intro__desktop-only {
+  display: none;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-mid-gray);
+  letter-spacing: 0.05em;
+}
+
+/* ── Mobile block ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  #btn-start {
+    display: none !important;
+  }
+
+  .intro__desktop-only {
+    display: block;
+  }
+}
+
 /* ── Scene screens — flex column filling 100vh ──────── */
 
 #screen-scene1,
