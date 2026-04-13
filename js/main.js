@@ -212,7 +212,7 @@ const CREDIT_IMAGES = [
   'assets/images/scene3/credits/Scene 3 \u2013 16.png',
   'assets/images/scene3/credits/Scene 3 \u2013 17.png',
   'assets/images/scene3/credits/Scene 3 \u2013 18.png',
-  'assets/images/scene3/credits/Scene 3 \u2013 36.png',
+  'assets/images/scene3/credits/Scene 3 \u2013 19.png',
 ];
 
 function runCredits() {
@@ -234,17 +234,21 @@ function runCredits() {
 
   const advance = () => {
     index++;
-    if (index >= CREDIT_IMAGES.length) {
-      abort.abort();
-      screen.classList.remove('is-clickable-scene');
-      tapHint.classList.remove('is-visible');
-      btnRestart.style.display = '';
-      return;
-    }
+    if (index >= CREDIT_IMAGES.length) return;
+
+    const isLast = index === CREDIT_IMAGES.length - 1;
+
     img.classList.add('is-swapping');
     setTimeout(() => {
       img.src = CREDIT_IMAGES[index];
       img.classList.remove('is-swapping');
+
+      if (isLast) {
+        abort.abort();
+        screen.classList.remove('is-clickable-scene');
+        tapHint.classList.remove('is-visible');
+        btnRestart.style.display = '';
+      }
     }, 500);
   };
 
